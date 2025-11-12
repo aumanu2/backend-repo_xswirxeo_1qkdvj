@@ -1,48 +1,63 @@
 """
-Database Schemas
+Database Schemas for SkillSwap
 
-Define your MongoDB collection schemas here using Pydantic models.
-These schemas are used for data validation in your application.
-
-Each Pydantic model represents a collection in your database.
-Model name is converted to lowercase for the collection name:
-- User -> "user" collection
-- Product -> "product" collection
-- BlogPost -> "blogs" collection
+Each Pydantic model corresponds to a MongoDB collection. The collection name
+is the lowercase of the class name.
 """
-
+from typing import List, Optional, Literal
 from pydantic import BaseModel, Field
-from typing import Optional
 
-# Example schemas (replace with your own):
-
-class User(BaseModel):
+class Userprofile(BaseModel):
     """
-    Users collection schema
-    Collection name: "user" (lowercase of class name)
+    Collection: userprofile
+    Represents a SkillSwap user profile with teach/learn skills and meta info.
     """
     name: str = Field(..., description="Full name")
-    email: str = Field(..., description="Email address")
-    address: str = Field(..., description="Address")
-    age: Optional[int] = Field(None, ge=0, le=120, description="Age in years")
-    is_active: bool = Field(True, description="Whether user is active")
+    email: str = Field(..., description="Unique email")
+    bio: Optional[str] = Field(None, description="Short bio")
+    avatar_url: Optional[str] = Field(None, description="Avatar image URL")
+    teach_skills: List[str] = Field(default_factory=list, description="Skills user can teach")
+    learn_skills: List[str] = Field(default_factory=list, description="Skills user wants to learn")
+    location: Optional[str] = Field(None, description="City/Country or timezone")
+    availability: Optional[str] = Field(None, description="Availability text, e.g., evenings/weekends")
+    skillcoins: int = Field(0, description="Reward balance")
 
-class Product(BaseModel):
+class Swipe(BaseModel):
     """
-    Products collection schema
-    Collection name: "product" (lowercase of class name)
+    Collection: swipe
+    Records a swipe action (like or pass) from a user to another user.
     """
-    title: str = Field(..., description="Product title")
-    description: Optional[str] = Field(None, description="Product description")
-    price: float = Field(..., ge=0, description="Price in dollars")
-    category: str = Field(..., description="Product category")
-    in_stock: bool = Field(True, description="Whether product is in stock")
+    user_id: str
+    target_id: str
+    action: Literal["like", "pass"]
 
-# Add your own schemas here:
-# --------------------------------------------------
+class Match(BaseModel):
+    """
+    Collection: match
+    Represents a mutual like between two users.
+    """
+    user_a: str
+    user_b: str
+    status: Literal["pending", "active", "blocked"] = "pending"
 
-# Note: The Flames database viewer will automatically:
-# 1. Read these schemas from GET /schema endpoint
-# 2. Use them for document validation when creating/editing
-# 3. Handle all database operations (CRUD) directly
-# 4. You don't need to create any database endpoints!
+class Session(BaseModel):
+    """
+    Collection: session
+    Represents a scheduled learning session between matched users.
+    """
+    match_id: str
+    host_id: str
+    guest_id: str
+    topic: Optional[str] = None
+    scheduled_time: Optional[str] = None  # ISO string for simplicity
+    mode: Literal["chat", "video"] = "chat"
+    status: Literal["scheduled", "completed", "cancelled"] = "scheduled"
+
+class Rewardtransaction(BaseModel):
+    """
+    Collection: rewardtransaction
+    Ledger of SkillCoin adjustments.
+    """
+    user_id: str
+    amount: int
+    reason: str

@@ -1,0 +1,26 @@
+INFO:     Will watch for changes in these directories: ['/home/workspace']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [158] using StatReload
+INFO:     Started server process [160]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     172.20.0.1:54760 - "HEAD / HTTP/1.1" 405 Method Not Allowed
+INFO:     172.20.0.1:55332 - "OPTIONS /api/users HTTP/1.1" 200 OK
+INFO:     172.20.0.1:55334 - "OPTIONS /api/users HTTP/1.1" 200 OK
+INFO:     172.20.0.1:55332 - "POST /api/users HTTP/1.1" 200 OK
+INFO:     172.20.0.1:55334 - "POST /api/users HTTP/1.1" 200 OK
+INFO:     172.20.0.1:55346 - "GET /api/skillcoins?user_id=6914b940382e456494051ff8 HTTP/1.1" 200 OK
+INFO:     172.20.0.1:55332 - "GET /api/recommendations?user_id=6914b940382e456494051ff8 HTTP/1.1" 200 OK
+INFO:     172.20.0.1:55346 - "GET /api/matches?user_id=6914b940382e456494051ff9 HTTP/1.1" 200 OK
+INFO:     172.20.0.1:55332 - "GET /api/skillcoins?user_id=6914b940382e456494051ff9 HTTP/1.1" 200 OK
+INFO:     172.20.0.1:55356 - "GET /api/skillcoins?user_id=6914b940382e456494051ff8 HTTP/1.1" 200 OK
+INFO:     172.20.0.1:55342 - "GET /api/matches?user_id=6914b940382e456494051ff8 HTTP/1.1" 200 OK
+INFO:     172.20.0.1:55372 - "GET /api/recommendations?user_id=6914b940382e456494051ff8 HTTP/1.1" 200 OK
+INFO:     172.20.0.1:55334 - "GET /api/recommendations?user_id=6914b940382e456494051ff9 HTTP/1.1" 200 OK
+INFO:     172.20.0.1:55342 - "GET /api/matches?user_id=6914b940382e456494051ff8 HTTP/1.1" 200 OK
+INFO:     172.20.0.1:33684 - "GET /api/matches?user_id=6914b940382e456494051ff9 HTTP/1.1" 200 OK
+INFO:     172.20.0.1:33686 - "GET /api/skillcoins?user_id=6914b940382e456494051ff9 HTTP/1.1" 200 OK
+INFO:     172.20.0.1:33676 - "GET /api/recommendations?user_id=6914b940382e456494051ff9 HTTP/1.1" 200 OK
+INFO:     172.20.0.1:33686 - "GET /api/skillcoins?user_id=6914b940382e456494051ff9 HTTP/1.1" 200 OK
+INFO:     172.20.0.1:33684 - "GET /api/matches?user_id=6914b940382e456494051ff9 HTTP/1.1" 200 OK
+INFO:     172.20.0.1:33676 - "GET /api/recommendations?user_id=6914b940382e456494051ff9 HTTP/1.1" 200 OK
